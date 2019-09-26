@@ -3,29 +3,39 @@
 
 {% block content %}
     <form method='POST' action='/playlists'>
+        {% include 'partials/playlists_form.html' %}
+
+        <!-- BUTTON -->
+        <p>
+            <button type='submit'>Save Playlist</button>
+        </p>
+    </form>
+{% endblock %}
+
+<!--
         <fieldset>
-            <legend>New Playlist</legend>
+            <legend>New Playlist</legend> --> -->
             <!-- TITLE -->
-            <p>
+        <!--     <p>
                 <label for='title'>Title</label><br>
                 <input type='text' name='title' />
             </p>
-
+                -->
             <!-- DECSRIPTION -->
-            <p>
+            <!-- <p>
                 <label for='description'>Description</label><br>
                 <input id='description' type='text' name='description' />
             </p>
-
+-->
             <!-- VIDEO LINKS -->
-            <p>
+        <!--     <p>
                 <label for='playlists-videos'>Videos</label><br>
                 <p>Add videos in the form of 'https://youtube.com/embed/KEY'. Separate with a newline.</p>
                 <textarea id='playlist-videos' name='videos' rows='10'></textarea>
-            </p>
+            </p>-->
 
             <!-- RATING -->
-            <p>
+        <!--     <p>
                 <label for='rating'>Rate this Playlist</label><br>
                 <p>Choose a number between 1-5</p>
                 <select>
@@ -35,11 +45,9 @@
                     <option value="Four">4</option>
                     <option value="Five">5</option>
                 </select>
-            </fieldset>
+            </fieldset>-->
 
             <!-- BUTTON -->
-            <p>
+        <!--  <p>
                 <button type='submit'>Save Playlist</button>
-            </p>
-    </form>
-{% endblock %}
+            </p> -->
