@@ -37,6 +37,13 @@ def playlists_new():
                            title='New Playlist')
 
 
+'''
+def playlists_cancel():
+    """Redirect to the homepage if user cancels."""
+    return redirect(url_for('playlists_show.html', cancel='cancel'))
+'''
+
+
 @app.route('/playlists', methods=['POST'])
 def playlists_submit():
     """Submit a new playlist."""
@@ -80,8 +87,14 @@ def playlists_update(playlist_id):
     return redirect(url_for('playlists_show', playlist_id=playlist_id))
 
 
-# @app.route('play')
+@app.route('/playlists/<playlist_id>/delete', methods=['POST'])
+def playlist_delete(playlist_id):
+    """Delete one playlist."""
+    playlist.delete_one({'_id': ObjectId(playlist_id)})
+    return redirect(url_for('playlists_index'))
 
+
+# @app.route('play')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
