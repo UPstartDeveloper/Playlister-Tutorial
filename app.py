@@ -3,7 +3,8 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 
-host = os.environ.get('MONGODB_URI')
+host = os.environ.get('MONGODB_URI')  # point to the mongodb URI if it exists
+# client = MongoClient(host=host)
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 playlists = db.playlists
@@ -11,13 +12,7 @@ comments = db.comments
 '''
 client = MongoClient()
 db = client.Playlister
-playlists = db.playlists
 '''
-
-
-# point to the mongodb URI if it exists
-# db = client.get_default_database()
-# playlists = db.playlists
 
 app = Flask(__name__)
 
@@ -72,7 +67,9 @@ def playlists_submit():
 def playlists_show(playlist_id):
     """Show a single playlist."""
     playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
-    return render_template('playlists_show.html', playlist=playlist)
+    playlists_comments = comments.find({'playlist_id': ObjectId(playlist_id)})
+    return render_template('playlists_show.html', playlist=playlist,
+                           comments=playlist_comments)
 
 
 @app.route('/playlists/<playlist_id>/edit')
