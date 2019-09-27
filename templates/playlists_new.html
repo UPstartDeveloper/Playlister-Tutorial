@@ -2,45 +2,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form method='POST' action='/playlists'>
-        {% include 'partials/playlists_form.html' %}
-
-        <!-- BUTTONS -->
-        <p>
-            <!-- Save button -->
-            <button type='submit'>Save Playlist</button>
-
-            <!-- Cancel button -->
-            <button type='cancel'>Cancel</button>
-        </p>
-    </form>
-{% endblock %}
-
-<!--
-        <fieldset>
-            <legend>New Playlist</legend> --> -->
-            <!-- TITLE -->
-        <!--     <p>
-                <label for='title'>Title</label><br>
-                <input type='text' name='title' />
-            </p>
-                -->
-            <!-- DECSRIPTION -->
-            <!-- <p>
-                <label for='description'>Description</label><br>
-                <input id='description' type='text' name='description' />
-            </p>
--->
-            <!-- VIDEO LINKS -->
-        <!--     <p>
-                <label for='playlists-videos'>Videos</label><br>
-                <p>Add videos in the form of 'https://youtube.com/embed/KEY'. Separate with a newline.</p>
-                <textarea id='playlist-videos' name='videos' rows='10'></textarea>
-            </p>-->
-
-            
-
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <form method='POST' action='/playlists'>
+            {% include 'partials/playlists_form.html' %}
             <!-- BUTTON -->
-        <!--  <p>
-                <button type='submit'>Save Playlist</button>
-            </p> -->
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Save Playlist</button>
+                </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
