@@ -11,7 +11,7 @@ playlists = db.playlists
 
 
 # point to the mongodb URI if it exists
-host = os.environ.get('MONGODB_URI', 'mongodb://zainr7989@gmail.com:D1sney_S8ndw1ch@ds253324.mlab.com:53324/heroku_4qb45hg7')
+host = os.environ.get('MONGODB_URI')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
 playlists = db.playlists
