@@ -26,7 +26,7 @@ def index():
 def playlists_index():
     """Show all playlists."""
     # fields = playlists.keys()
-    return render_template('playlists_index.html', playlists=playlists.find())
+    return render_template('playlists_index.html', playlists=playlists)
 
 
 @app.route('/playlists/new')
