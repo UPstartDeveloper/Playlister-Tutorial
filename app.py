@@ -3,6 +3,11 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 
+host = os.environ.get('MONGODB_URI')
+client = MongoClient(host=f'{host}?retryWrites=false')
+db = client.get_default_database()
+playlists = db.playlists
+comments = db.comments
 '''
 client = MongoClient()
 db = client.Playlister
@@ -11,10 +16,8 @@ playlists = db.playlists
 
 
 # point to the mongodb URI if it exists
-host = os.environ.get('MONGODB_URI')
-client = MongoClient(host=f'{host}?retryWrites=false')
-db = client.get_default_database()
-playlists = db.playlists
+# db = client.get_default_database()
+# playlists = db.playlists
 
 app = Flask(__name__)
 
@@ -102,7 +105,21 @@ def playlist_delete(playlist_id):
     return redirect(url_for('playlists_index'))
 
 
+# COMMENT ROUTES #
+@app.route('/playlists/comments', methods=['POST'])
+def comments_new():
+    """Submit a new comment."""
+    comment = {
+        'title': request.form.get('title'),
+        'content': request.form.get('content'),
+        'playlist_id': ObjectId(request.form.get('playlist_id'))
+    }
+    print(comment)
+    comment_id = comments.insert_one(comment).inserted_id
+    return redirect(url_for('playlists_show', playlist_id=playlist_id))
+
 # @app.route('play')
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
