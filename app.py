@@ -72,7 +72,7 @@ def playlists_show(playlist_id):
     playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
     playlists_comments = comments.find({'playlist_id': ObjectId(playlist_id)})
     return render_template('playlists_show.html', playlist=playlist,
-                           comments=playlist_comments)
+                           comments=playlists_comments)
 
 
 @app.route('/playlists/<playlist_id>/edit')
@@ -125,7 +125,8 @@ def comments_delete(comment_id):
     if request.form.get('_method') == 'DELETE':
         comment = comments.find_one({'_id': ObjectId(comment_id)})
         comments.delete_one({'_id': ObjectId(comment_id)})
-        return redirect(url_for('playlist_show', playlist_id=comment.get('playlist_id')))
+        return redirect(url_for('playlist_show',
+                        playlist_id=comment.get('playlist_id')))
     else:
         raise NotFound()
 
