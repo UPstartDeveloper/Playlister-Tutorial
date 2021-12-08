@@ -13,12 +13,6 @@ __pycache__/
 # AWS stuff
 *.pem
 
-# Keras Models
-model/
-
-# Images Downloaded for Testing
-test-assets/
-
 # Distribution / packaging
 .Python
 build/
