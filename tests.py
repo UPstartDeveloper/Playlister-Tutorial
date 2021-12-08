@@ -1,6 +1,6 @@
 # tests.py
 from unittest import TestCase, main as unittest_main, mock
-from app import app
+from app import create_app
 from bson.objectid import ObjectId
 
 sample_playlist_id = ObjectId("5d55cffc4a3d4031f42827a3")
@@ -26,6 +26,7 @@ class PlaylistsTests(TestCase):
         """Stuff to do before every test."""
 
         # Get the FLask test client
+        app = create_app()
         self.client = app.test_client()
 
         # Show Flask errors that happen during tests

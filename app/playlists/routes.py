@@ -32,7 +32,7 @@ def playlists_submit():
     }
     print(playlist)
     playlist_id = playlists.insert_one(playlist).inserted_id
-    return redirect(url_for("playlists_show", playlist_id=playlist_id))
+    return redirect(url_for("playlists.playlists_show", playlist_id=playlist_id))
 
 
 @playlists_bp.route("/playlists/<playlist_id>", methods=["GET"])
@@ -64,11 +64,11 @@ def playlists_update(playlist_id):
         "videos": request.form.get("videos").split(),
     }
     playlists.update_one({"_id": ObjectId(playlist_id)}, {"$set": updated_playlist})
-    return redirect(url_for("playlists_show", playlist_id=playlist_id))
+    return redirect(url_for("playlists.playlists_show", playlist_id=playlist_id))
 
 
 @playlists_bp.route("/playlists/<playlist_id>/delete", methods=["POST"])
 def playlist_delete(playlist_id):
     """Delete one playlist."""
     playlists.delete_one({"_id": ObjectId(playlist_id)})
-    return redirect(url_for("playlists_index"))
+    return redirect(url_for("playlists.playlists_index"))
