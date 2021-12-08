@@ -18,11 +18,12 @@
     <div class="form-group">
         <label for='playlist-videos'>Videos</label><br>
         <p>Add videos in the form of 'https://youtube.com/embed/KEY'. Separate with a newline.</p>
-        <textarea idea='playlist-videos' name='videos' rows='10'/>{{ "\n".join(playlist.videos) }}</textarea>
+        <textarea idea='playlist-videos' name='videos' rows='10'>{{ "\n".join(playlist.videos) }}</textarea>
+    </div>
+
+    <!-- BUTTON -->
+    <div class="form-group">
+        <input type='submit' value="Save Playlist">
     </div>
 </fieldset>
 
-<!-- BUTTON -->
-<p>
-    <button type='submit'>Save Playlist</button>
-</p>
