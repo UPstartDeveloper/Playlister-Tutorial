@@ -102,8 +102,6 @@ def comments_delete(comment_id):
         playlist_id = comment.get('playlist_id')
         comments.delete_one({'_id': ObjectId(comment_id)})
         return redirect(url_for('playlists_show', playlist_id=playlist_id))
-    else:
-        raise NotFound()
 
 
 if __name__ == '__main__':
