@@ -1,14 +1,14 @@
 from flask import Blueprint, request, redirect, url_for
 from bson.objectid import ObjectId
 
-from app.util import get_db_collections
+from app.util import get_db
 
-playlists, comments = get_db_collections()
+db = get_db()
 
-comments_bp = Blueprint("comments", __name__)
+comments = Blueprint("comments", __name__)
 
 
-@comments_bp.route("/playlists/comments", methods=["POST"])
+@comments.route("/playlists/comments", methods=["POST"])
 def comments_new():
     """Submit a new comment."""
     comment = {
@@ -17,17 +17,17 @@ def comments_new():
         "playlist_id": ObjectId(request.form.get("playlist._id")),
     }
     print(comment)
-    comment_id = comments.insert_one(comment).inserted_id
+    comment_id = db.comments.insert_one(comment).inserted_id
     return redirect(
         url_for("playlists.playlists_show", playlist_id=request.form.get("playlist._id"))
     )
 
 
-@comments_bp.route("/playlists/comments/<comment_id>", methods=["POST"])
+@comments.route("/playlists/comments/<comment_id>", methods=["POST"])
 def comments_delete(comment_id):
     """Action to delete a comment."""
     if request.form.get("_method") == "DELETE":
-        comment = comments.find_one({"_id": ObjectId(comment_id)})
+        comment = db.comments.find_one({"_id": ObjectId(comment_id)})
         playlist_id = comment.get("playlist_id")
-        comments.delete_one({"_id": ObjectId(comment_id)})
+        db.comments.delete_one({"_id": ObjectId(comment_id)})
         return redirect(url_for("playlists.playlists_show", playlist_id=playlist_id))
