@@ -11,7 +11,7 @@ playlists = Blueprint("playlists", __name__)
 @playlists.route("/")
 def playlists_index():
     """Show all playlists."""
-    return render_template("playlists_index.html", playlists=playlists.find())
+    return render_template("playlists_index.html", playlists=db.playlists.find())
 
 
 @playlists.route("/playlists/new")

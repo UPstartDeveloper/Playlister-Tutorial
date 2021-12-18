@@ -1,6 +1,6 @@
 from flask import Flask
-from app.comments.routes import comments
-from app.playlists.routes import playlists
+from app.controllers.comments import comments
+from app.controllers.playlists import playlists
 
 
 def create_app():
